@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1737042000003,
+    "nome": "Echo Dot 5ª Geração com Relógio",
+    "valor": "426,55",
+    "link": "https://www.amazon.com.br/echo-dot-5-relogio",
+    "fotos": "https://m.media-amazon.com/images/I/71Y875yv9NL._AC_SL1500_.jpg",
+    "desc": "O melhor som já lançado para o Echo Dot. Alexa integrada.",
+    "categoria": "eletronicos",
+    "coments": "Ricardo: Som impressionante para o tamanho.\nFernanda: O relógio ajuda muito no criado-mudo. | https://m.media-amazon.com/images/I/51I7I-I7rGL._AC_SL1000_.jpg"
+  },
+  {
+    "id": 1737042000004,
+    "nome": "Fritadeira Air Fryer Mondial 4L",
+    "valor": "379,00",
+    "link": "https://www.amazon.com.br/air-fryer-mondial",
+    "fotos": "https://m.media-amazon.com/images/I/71-89vSshXL._AC_SL1500_.jpg",
+    "desc": "Comida saudável e crocante sem usar uma gota de óleo.",
+    "categoria": "lar",
+    "coments": "Carlos: Prática e muito fácil de limpar.\nJuliana: Melhor compra para a minha cozinha! | https://m.media-amazon.com/images/I/61iXfGz+V+L._AC_SL1000_.jpg"
+  },
+  {
+    "id": 1737042000005,
+    "nome": "Perfume Calvin Klein One 100ml",
+    "valor": "219,00",
+    "link": "https://www.amazon.com.br/ck-one-perfume",
+    "fotos": "https://m.media-amazon.com/images/I/51N-D7yS-LL._AC_SL1000_.jpg",
+    "desc": "Fragrância unissex clássica e refrescante.",
+    "categoria": "beleza",
+    "coments": "Paulo: Cheiro de limpeza, adoro para o dia a dia.\nSandra: Entrega da Amazon nota 10."
+  }
+]

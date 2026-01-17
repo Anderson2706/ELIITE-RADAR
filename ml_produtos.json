@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1737042000000,
+    "nome": "IPhone 15 Pro Max 256GB Titânio",
+    "valor": "7.899,00",
+    "link": "https://www.mercadolivre.com.br/iphone-15-pro-max",
+    "fotos": "https://http2.mlstatic.com/D_NQ_NP_2X_724430-MLA97899894923_112025-F.webp",
+    "desc": "O iPhone mais poderoso com chip A17 Pro e câmera de 48MP.",
+    "categoria": "eletronicos",
+    "coments": "João Silva: Chegou muito rápido! | https://m.media-amazon.com/images/I/51-2Q-xG2UL._AC_SY400_.jpg\nMaria Oliveira: O titânio é lindo e super leve."
+  },
+  {
+    "id": 1737042000001,
+    "nome": "Kit Skincare L'Oréal Paris Revitalift",
+    "valor": "129,90",
+    "link": "https://www.mercadolivre.com.br/skincare-loreal",
+    "fotos": "https://http2.mlstatic.com/D_NQ_NP_2X_733615-MLA44503264642_012021-F.webp",
+    "desc": "Reduz rugas e linhas de expressão com ácido hialurônico puro.",
+    "categoria": "beleza",
+    "coments": "Clara: Minha pele mudou em uma semana!\nBeatriz: Original e bem embalado. | https://http2.mlstatic.com/D_NQ_NP_2X_941307-MLA94379408325_102025-F.webp"
+  },
+  {
+    "id": 1737042000002,
+    "nome": "CUPOM: R$ 50 OFF em Moda",
+    "valor": "MODA50",
+    "link": "https://www.mercadolivre.com.br/cupons",
+    "fotos": "https://img.freepik.com/vetores-gratis/etiqueta-de-venda-de-oferta-especial-de-estilo-moderno_1017-27331.jpg",
+    "desc": "Válido para compras acima de R$ 250 em moda selecionada.",
+    "categoria": "cupons",
+    "coments": ""
+  }
+]
