@@ -3,148 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElitePromo | Radar Dual Premium</title>
+    <title>ElitePromo | Luxury Radar</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23facc15;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23fbbf24;stop-opacity:1' /></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><text x='50%22' y='65%22' font-family='Arial' font-size='40' font-weight='bold' text-anchor='middle' fill='black'>EP</text></svg>">
+    
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #facc15; --bg: #05070a; --surface: #111827;
-            --text: #f3f4f6; --border: rgba(255,255,255,0.08); --accent: #10b981;
+            --primary: #facc15; --bg: #f8fafc; --surface: #ffffff;
+            --text: #0f172a; --border: #e2e8f0; --accent: #10b981;
+            --header-bg: #0f172a; --footer-bg: #ffffff;
         }
-        [data-platform="amazon"] { --primary: #ff9900; --bg: #0f1111; --surface: #232f3e; }
-        [data-theme="light"] { --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --border: rgba(0,0,0,0.1); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s ease; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
-
-        /* HEADER */
-        header { background: var(--bg); padding: 15px 20px; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border); backdrop-filter: blur(15px); }
-        .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
-        
-        .platform-switcher { display: flex; align-items: center; background: var(--surface); padding: 5px; border-radius: 50px; border: 1px solid var(--border); cursor: pointer; position: relative; width: 110px; height: 42px; }
-        .platform-logo { width: 50%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 2; filter: grayscale(1) opacity(0.5); }
-        .platform-logo img { height: 16px; }
-        .platform-logo.active { filter: grayscale(0) opacity(1); }
-        .switch-indicator { position: absolute; width: 48px; height: 32px; background: var(--bg); border-radius: 40px; border: 1px solid var(--primary); box-shadow: 0 0 15px var(--primary); z-index: 1; left: 5px; }
-        [data-platform="amazon"] .switch-indicator { left: 57px; }
-
-        .search-container { display: none; padding: 10px 20px; animation: slideDown 0.3s; }
-        .search-container.active { display: block; }
-        .search-bar { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 5px 15px; }
-        .search-bar input { background: none; border: none; color: var(--text); width: 100%; padding: 10px; outline: none; }
-
-        /* CATEGORIAS */
-        .categories { display: flex; gap: 10px; overflow-x: auto; padding: 15px 20px; scrollbar-width: none; }
-        .categories::-webkit-scrollbar { display: none; }
-        .chip { padding: 8px 18px; border-radius: 50px; background: var(--surface); border: 1px solid var(--border); font-size: 13px; font-weight: 700; white-space: nowrap; cursor: pointer; }
-        .chip.active { background: var(--primary); color: #000; border-color: var(--primary); }
-
-        /* RADAR */
-        .radar-box { margin: 10px 20px; padding: 25px; border-radius: 24px; background: linear-gradient(135deg, var(--primary) -100%, transparent 100%); border: 1px solid var(--border); text-align: center; cursor: pointer; position: relative; overflow: hidden; }
-        .radar-pulse { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border: 2px solid var(--primary); border-radius: 50%; animation: pulse 2s infinite; opacity: 0; }
-        @keyframes pulse { 0% { width: 50px; opacity: 1; } 100% { width: 300px; opacity: 0; } }
-
-        /* GRID */
-        .grid { padding: 0 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .card { background: var(--surface); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; }
-        .card-img { width: 100%; height: 140px; object-fit: contain; background: #fff; padding: 10px; }
-        .card-price { font-size: 18px; font-weight: 800; color: var(--accent); }
-
-        /* FOOTER CORPORATIVO */
-        footer { background: var(--surface); padding: 40px 20px 20px; border-top: 1px solid var(--border); margin-top: 40px; }
-        .f-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1200px; margin: auto; }
-        .f-col h4 { font-size: 11px; text-transform: uppercase; color: var(--primary); margin-bottom: 15px; letter-spacing: 1px; }
-        .f-col a { display: block; color: var(--text); opacity: 0.6; text-decoration: none; margin-bottom: 10px; font-size: 13px; }
-        
-        .partnership { 
-            grid-column: 1 / -1; background: var(--bg); padding: 25px; border-radius: 24px; 
-            text-align: center; border: 1px solid var(--border); margin-top: 20px;
+        [data-theme="dark"] {
+            --bg: #020617; --surface: #0f172a; --text: #f8fafc;
+            --border: #1e293b; --header-bg: #000000; --footer-bg: #020617;
         }
-        .partnership img { height: 22px; filter: grayscale(1) brightness(1.5); transition: 0.3s; }
-        [data-theme="light"] .partnership img { filter: none; }
 
-        /* PANEL */
-        #details-panel { position: fixed; bottom: -110%; left: 0; width: 100%; height: 88%; background: var(--surface); z-index: 2000; border-radius: 35px 35px 0 0; padding: 25px; border-top: 1px solid var(--border); overflow-y: auto; }
+        [data-platform="amazon"] { --primary: #ff9900; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; letter-spacing: -0.02em; }
+
+        /* HEADER PREMIUM */
+        .top-nav { background: var(--header-bg); color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo-premium { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 22px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+        .logo-premium svg { filter: drop-shadow(0 0 8px var(--primary)); }
+
+        header { background: var(--surface); padding: 30px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 25px; }
+
+        /* PLATFORM SWITCHER */
+        .platform-switcher { display: flex; align-items: center; background: var(--bg); padding: 6px; border-radius: 50px; border: 1px solid var(--border); cursor: pointer; position: relative; width: 180px; height: 50px; }
+        .plat-opt { flex: 1; z-index: 2; display: flex; align-items: center; justify-content: center; filter: grayscale(1) brightness(0.5); opacity: 0.4; }
+        .plat-opt.active { filter: grayscale(0) brightness(1); opacity: 1; }
+        .plat-opt img { height: 20px; }
+        .switch-indicator { position: absolute; left: 6px; width: 84px; height: 38px; background: var(--surface); border-radius: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        [data-platform="amazon"] .switch-indicator { transform: translateX(84px); }
+
+        /* BUSCA */
+        .search-wrapper { width: 100%; max-width: 600px; position: relative; }
+        .search-wrapper input { width: 100%; padding: 15px 50px; border-radius: 100px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; }
+        .search-wrapper i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); opacity: 0.5; }
+
+        /* MAIN CONTENT */
+        .main-content { max-width: 1300px; margin: 40px auto; display: grid; grid-template-columns: 300px 1fr; gap: 30px; padding: 0 20px; }
+        @media (max-width: 900px) { .main-content { grid-template-columns: 1fr; } }
+
+        /* RADAR CARD */
+        .radar-card { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 40px 30px; border-radius: 24px; text-align: center; position: sticky; top: 100px; border: 1px solid rgba(255,255,255,0.1); }
+        .radar-circle { width: 80px; height: 80px; border: 1px solid var(--primary); border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; position: relative; }
+        .radar-circle::after { content: ''; position: absolute; inset: -8px; border: 1px solid var(--primary); border-radius: 50%; opacity: 0.3; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.3; } 100% { transform: scale(1.3); opacity: 0; } }
+
+        /* GRID PRODUTOS */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 25px; }
+        .card { background: var(--surface); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .card-img { width: 100%; height: 200px; object-fit: contain; padding: 20px; background: white; }
+
+        /* RODAPÉ PREMIUM */
+        .premium-footer { background: var(--footer-bg); padding: 80px 40px 40px; border-top: 1px solid var(--border); margin-top: 100px; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+        .footer-col h4 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { font-size: 14px; margin-bottom: 15px; opacity: 0.6; cursor: pointer; }
+        .footer-col ul li:hover { color: var(--primary); opacity: 1; }
+
+        .partnership-display { border-top: 1px solid var(--border); margin-top: 60px; padding-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .partnership-logos { display: flex; align-items: center; gap: 30px; }
+        .partnership-logos img { height: 22px; }
+        .footer-bottom-text { font-size: 12px; opacity: 0.4; text-align: center; max-width: 600px; line-height: 1.8; }
+
+        /* MODAL */
+        #details-panel { position: fixed; bottom: -110%; left: 0; width: 100%; height: 95%; background: var(--surface); z-index: 2000; border-radius: 40px 40px 0 0; padding: 40px; overflow-y: auto; box-shadow: 0 -20px 60px rgba(0,0,0,0.2); }
         #details-panel.open { bottom: 0; }
-        .btn-buy { display: block; background: var(--primary); color: #000; text-align: center; padding: 18px; border-radius: 18px; text-decoration: none; font-weight: 800; margin: 20px 0; }
-        .review-card { background: var(--bg); padding: 15px; border-radius: 15px; margin-bottom: 12px; border: 1px solid var(--border); }
-
-        @keyframes pulse { 0% { width: 50px; opacity: 1; } 100% { width: 300px; opacity: 0; } }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); display: none; z-index: 1999; }
     </style>
 </head>
-<body data-platform="ml">
+<body data-platform="ml" data-theme="light">
+
+    <nav class="top-nav">
+        <div class="logo-premium" onclick="window.location.reload()">
+            <svg width="32" height="32" viewBox="0 0 100 100"><defs><linearGradient id='lg' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:var(--primary);stop-opacity:1'/><stop offset='100%' style='stop-color:#fbbf24;stop-opacity:1'/></linearGradient></defs><circle cx="50" cy="50" r="45" fill="url(#lg)"/><text x="50%" y="66%" font-size="38" font-weight="900" text-anchor="middle" fill="black">EP</text></svg>
+            ElitePromo
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <i class="ph ph-moon" id="theme-icon" style="font-size: 26px; cursor: pointer;" onclick="toggleTheme()"></i>
+            <div style="width: 40px; height: 40px; background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="ph ph-user" style="font-size: 20px;"></i></div>
+        </div>
+    </nav>
 
     <header>
-        <div class="nav-top">
-            <div class="platform-switcher" onclick="switchPlatform()">
-                <div class="switch-indicator"></div>
-                <div class="platform-logo active" id="btn-ml"><img src="https://anyhub.com.br/wp-content/uploads/2022/07/mercado-livre.png"></div>
-                <div class="platform-logo" id="btn-amz"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"></div>
-            </div>
-            <div style="display: flex; gap: 15px;">
-                <i class="ph ph-magnifying-glass" style="font-size: 24px; cursor: pointer;" onclick="toggleSearch()"></i>
-                <i class="ph ph-sun" style="font-size: 24px; cursor: pointer;" onclick="toggleTheme()"></i>
-            </div>
+        <div class="platform-switcher" onclick="switchPlatform()">
+            <div class="switch-indicator"></div>
+            <div class="plat-opt active" id="btn-ml"><img src="https://anyhub.com.br/wp-content/uploads/2022/07/mercado-livre.png"></div>
+            <div class="plat-opt" id="btn-amz"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"></div>
         </div>
-        <div class="search-container" id="searchContainer">
-            <div class="search-bar"><input type="text" id="searchInput" placeholder="O que você busca?" oninput="filtrarGeral()"></div>
+        <div class="search-wrapper">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="O que você deseja encontrar hoje?" oninput="filtrarGeral()">
         </div>
     </header>
 
-    <div class="categories">
-        <div class="chip active" onclick="filtrarCat('todos', this)">🚀 Tudo</div>
-        <div class="chip" onclick="filtrarCat('eletronicos', this)">Eletrônicos</div>
-        <div class="chip" onclick="filtrarCat('beleza', this)">Beleza</div>
-        <div class="chip" onclick="filtrarCat('lar', this)">Lar</div>
-        <div class="chip" onclick="filtrarCat('moda', this)">Moda</div>
-        <div class="chip" onclick="filtrarCat('cupons', this)">Cupons</div>
-    </div>
-
-    <div class="radar-box" onclick="filterToday()">
-        <div class="radar-pulse"></div>
-        <i class="ph-fill ph-lightning" style="font-size: 32px; color: var(--primary);"></i>
-        <h3 id="radar-text" style="margin-top:10px;">Radar de Novidades</h3>
-        <p style="font-size: 11px; opacity: 0.6;">Toque para filtrar apenas ofertas de hoje</p>
-    </div>
-
-    <main class="grid" id="mainGrid"></main>
-
-    <footer>
-        <div class="f-grid">
-            <div class="f-col">
-                <h4>Navegação</h4>
-                <a href="#" onclick="location.reload()">Início</a>
-                <a href="#" onclick="filtrarCat('cupons', this)">Cupons</a>
-                <a href="#" onclick="filterToday()">Radar Hoje</a>
-            </div>
-            <div class="f-col">
-                <h4>Suporte</h4>
-                <a href="https://wa.me/SEUNUMERO">WhatsApp</a>
-                <a href="#">Privacidade</a>
-                <a href="#">Termos</a>
-            </div>
-            <div class="partnership">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
-                    <span style="font-weight: 900; font-size: 14px; letter-spacing: 1px;">ELITEPROMO</span>
-                    <i class="ph ph-x" style="font-size: 10px; opacity: 0.5;"></i>
-                    <img id="footer-logo" src="https://anyhub.com.br/wp-content/uploads/2022/07/mercado-livre.png">
+    <main class="main-content">
+        <aside>
+            <div class="radar-card">
+                <span style="font-size: 11px; font-weight: 800; letter-spacing: 3px; opacity: 0.5;">DEEP RADAR</span>
+                <div class="radar-circle">
+                    <i class="ph-fill ph-lightning" style="font-size: 35px; color: var(--primary);"></i>
                 </div>
-                <p style="font-size: 12px; opacity: 0.7; line-height: 1.5;" id="footer-text">
-                    Distribuidor Autorizado e Afiliado Oficial Mercado Livre.<br>
-                    Ofertas verificadas por inteligência artificial.
-                </p>
+                <h3 style="margin-bottom: 10px; font-weight: 300;">Novas Descobertas</h3>
+                <button onclick="filterToday()" style="background: var(--primary); border: none; padding: 15px; border-radius: 50px; font-weight: 800; width: 100%; cursor: pointer; color: black; margin-top: 20px;">Sincronizar Ofertas</button>
+            </div>
+        </aside>
+
+        <section class="products-grid" id="mainGrid"></section>
+    </main>
+
+    <footer class="premium-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo-premium" onclick="window.location.reload()" style="margin-bottom: 20px; color: var(--text);">
+                    <svg width="24" height="24" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="var(--primary)"/><text x="50%" y="66%" font-size="38" font-weight="900" text-anchor="middle" fill="black">EP</text></svg>
+                    ElitePromo
+                </div>
+                <p style="font-size: 14px; opacity: 0.6; line-height: 1.8;">Curadoria inteligente das melhores ofertas do mercado global, verificadas em tempo real.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul><li>Sobre nós</li><li>Blog</li><li>Carreiras</li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ajuda</h4>
+                <ul><li>Suporte</li><li>Termos</li><li>Privacidade</li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4>
+                <ul><li>Instagram</li><li>Telegram</li><li>TikTok</li></ul>
             </div>
         </div>
-        <p style="text-align: center; font-size: 10px; opacity: 0.3; margin-top: 30px;">&copy; 2026 ElitePromo Radar - Todos os direitos reservados.</p>
+
+        <div class="partnership-display">
+            <div class="partnership-logos">
+                <span style="font-weight: 800; font-size: 13px; letter-spacing: 1px;">ELITEPROMO</span>
+                <div style="width: 1px; height: 20px; background: var(--border);"></div>
+                <img id="footer-logo" src="https://anyhub.com.br/wp-content/uploads/2022/07/mercado-livre.png">
+            </div>
+            <p class="footer-bottom-text">
+                ElitePromo é uma plataforma de afiliação e curadoria. Recebemos comissões por compras através de nossos links, sem custo adicional para o usuário. <br>
+                © 2026 ElitePromo Radar Premium.
+            </p>
+        </div>
     </footer>
 
     <div id="details-panel">
-        <div style="width: 40px; height: 5px; background: #444; margin: 0 auto 20px; border-radius: 10px;" onclick="closeDetails()"></div>
+        <div style="width: 60px; height: 4px; background: var(--border); margin: 0 auto 30px; border-radius: 10px;" onclick="closeDetails()"></div>
         <div id="panel-content"></div>
     </div>
-    <div id="overlay" onclick="closeDetails()" style="position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:1999; display:none;"></div>
+    <div class="overlay" id="overlay" onclick="closeDetails()"></div>
 
     <script>
         let db = [];
@@ -155,7 +174,7 @@
                 const res = await fetch(`${platform}_produtos.json`);
                 db = await res.json();
                 render(db);
-            } catch (e) { document.getElementById('mainGrid').innerHTML = "<p style='grid-column:1/-1;text-align:center;padding:50px;'>Aguardando produtos do servidor...</p>"; }
+            } catch (e) { document.getElementById('mainGrid').innerHTML = "Sincronizando banco..."; }
         }
 
         function switchPlatform() {
@@ -163,60 +182,60 @@
             document.body.setAttribute('data-platform', platform);
             document.getElementById('btn-ml').classList.toggle('active');
             document.getElementById('btn-amz').classList.toggle('active');
-            
-            // Atualiza Rodapé
             document.getElementById('footer-logo').src = platform === 'ml' ? 'https://anyhub.com.br/wp-content/uploads/2022/07/mercado-livre.png' : 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg';
-            document.getElementById('footer-text').innerHTML = `Distribuidor Autorizado e Afiliado Oficial ${platform === 'ml' ? 'Mercado Livre' : 'Amazon'}.<br>Ofertas verificadas por inteligência artificial.`;
-            
             loadDB();
         }
 
+        function toggleTheme() {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-icon').className = isDark ? 'ph ph-moon' : 'ph ph-sun';
+        }
+
         function render(data) {
-            const mainGrid = document.getElementById('mainGrid');
-            mainGrid.innerHTML = data.map(p => `
+            const grid = document.getElementById('mainGrid');
+            grid.innerHTML = data.map(p => `
                 <div class="card" onclick="openDetails(${p.id})">
                     <img src="${p.fotos.split('\n')[0]}" class="card-img">
-                    <div style="padding:12px;">
-                        <div style="font-size:11px; font-weight:600; height:30px; overflow:hidden;">${p.nome}</div>
-                        <div class="card-price">R$ ${p.valor}</div>
+                    <div style="padding:20px;">
+                        <span style="font-size:10px; font-weight:800; opacity:0.5; text-transform:uppercase;">${p.categoria}</span>
+                        <div style="font-size:15px; font-weight:600; margin:8px 0; height:42px; overflow:hidden;">${p.nome}</div>
+                        <div style="font-size:20px; font-weight:800; color:var(--accent);">R$ ${p.valor}</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function filterToday() {
-            const hoje = new Date().toLocaleDateString('pt-BR');
-            const novidades = db.filter(p => new Date(p.id).toLocaleDateString('pt-BR') === hoje);
-            if(novidades.length > 0) render(novidades);
-            else alert("Ainda não temos ofertas novas hoje!");
-        }
-
         function openDetails(id) {
             const p = db.find(x => x.id === id);
-            const content = document.getElementById('panel-content');
-            
-            const reviewsHTML = p.coments ? p.coments.split('\n').map(c => {
-                const [info, foto] = c.split('|');
-                return `
-                    <div class="review-card">
-                        <div style="display:flex; justify-content:space-between;">
-                            <strong>${info.split(':')[0]}</strong>
-                            <span style="color:var(--primary);">★★★★★</span>
-                        </div>
-                        <p style="font-size:13px; margin-top:5px; opacity:0.8;">${info.split(':')[1] || ''}</p>
-                        ${foto ? `<img src="${foto.trim()}" style="width:100%; border-radius:12px; margin-top:10px;">` : ''}
+            const fotos = p.fotos.split('\n');
+            const reviews = p.coments ? p.coments.split('\n').map(c => {
+                const [info, f] = c.split('|');
+                return `<div style="background:var(--bg); padding:20px; border-radius:15px; margin-bottom:15px; border:1px solid var(--border);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <strong>${info.split(':')[0]}</strong> <span style="color:var(--primary)">★★★★★</span>
                     </div>
-                `;
+                    <p style="font-size:14px; opacity:0.7;">${info.split(':')[1] || ''}</p>
+                    ${f ? `<img src="${f.trim()}" style="width:100%; max-width:400px; border-radius:12px; margin-top:15px;">` : ''}
+                </div>`;
             }).join('') : '';
 
-            content.innerHTML = `
-                <img src="${p.fotos.split('\n')[0]}" style="width:100%; height:220px; object-fit:contain; background:#fff; border-radius:20px; padding:15px;">
-                <h2 style="margin-top:15px; font-size:20px;">${p.nome}</h2>
-                <div style="font-size:32px; font-weight:900; color:var(--accent); margin:10px 0;">R$ ${p.valor}</div>
-                <a href="${p.link}" target="_blank" class="btn-buy">EU QUERO NA ${platform.toUpperCase()}</a>
-                <p style="font-size:14px; line-height:1.6; opacity:0.8;">${p.desc}</p>
-                <h3 style="margin:25px 0 15px; font-size:16px;">Avaliações de Clientes</h3>
-                ${reviewsHTML}
+            document.getElementById('panel-content').innerHTML = `
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:50px;">
+                    <div style="display:flex; gap:15px; overflow-x:auto;">
+                        ${fotos.map(f => `<img src="${f}" style="height:400px; border-radius:24px; border:1px solid var(--border); background:white; padding:20px;">`).join('')}
+                    </div>
+                    <div>
+                        <h2 style="font-size:28px; margin-bottom:20px;">${p.nome}</h2>
+                        <div style="font-size:40px; font-weight:900; color:var(--accent); margin-bottom:30px;">R$ ${p.valor}</div>
+                        <a href="${p.link}" target="_blank" style="display:block; background:var(--primary); color:black; text-align:center; padding:22px; border-radius:100px; text-decoration:none; font-weight:800; font-size:18px;">IR PARA ${platform.toUpperCase()}</a>
+                        <p style="opacity:0.7; margin-top:40px; line-height:1.8;">${p.desc}</p>
+                    </div>
+                </div>
+                <div style="max-width:800px; margin:60px auto 0;">
+                    <h3 style="margin-bottom:25px; text-align:center;">Opinião de quem já comprou</h3>
+                    ${reviews}
+                </div>
             `;
             document.getElementById('details-panel').classList.add('open');
             document.getElementById('overlay').style.display = 'block';
@@ -232,15 +251,10 @@
             render(db.filter(i => i.nome.toLowerCase().includes(termo)));
         }
 
-        function filtrarCat(cat, el) {
-            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            if(cat === 'todos') render(db);
-            else render(db.filter(i => i.categoria === cat));
+        function filterToday() {
+            const hoje = new Date().toLocaleDateString('pt-BR');
+            render(db.filter(p => new Date(p.id).toLocaleDateString('pt-BR') === hoje));
         }
-
-        function toggleSearch() { document.getElementById('searchContainer').classList.toggle('active'); }
-        function toggleTheme() { const b = document.body; b.getAttribute('data-theme') === 'light' ? b.removeAttribute('data-theme') : b.setAttribute('data-theme', 'light'); }
 
         loadDB();
     </script>
